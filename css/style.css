@@ -1,0 +1,16 @@
+#favorite{
+    margin-top: 20px;
+    margin-left: 50px;
+}
+.header{
+    text-align: center;
+}
+.instruct{
+    font-size: 150%;
+}
+ul{
+    overflow: auto;
+}
+button{
+    margin: 20px 10px 10px 0;
+}
