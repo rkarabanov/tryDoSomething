@@ -2,11 +2,11 @@
     <div class="row">
         <div class="col-xs-12">
             Please select a location below:
-            <ul>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
+            <ul class="ul-staring">
+                <li ng-repeat="property in propertyes"><a href="/{{property.lister_url|changeURL}}">
+                    <span><img ng-src="{{property.thumb_url}}"></span>  <span>{{property.title}}</span>
+                </a>
+                </li>
             </ul>
         </div>
     </div>
