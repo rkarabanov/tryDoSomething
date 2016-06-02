@@ -1,5 +1,7 @@
 'use strict';
-var propertyApp=angular.module('propertyApp',['ngRoute']);
+var propertyApp=angular.module('propertyApp',['ngRoute','controllers']);
+
+var controllers=angular.module('controllers',[]);
 
 propertyApp
 .config(['$routeProvider','$locationProvider',function ($routeProvide, $locationProvide) {
@@ -16,9 +18,13 @@ propertyApp
             templateUrl:'templates/listed_locations.html',
             controller:'PropertySearchCtrl'
         })
-        .when('/:propertyId',{
+        .when('/detail',{
             templateUrl:'templates/one_property.html',
             controller:'PropertyOneCtrl'
+        })
+        .when('/favorite',{
+            templateUrl:'templates/favor.html',
+            controller:'FavorCtrl'
         })
         .otherwise({
             redirectTo:'/'

@@ -1,10 +1,46 @@
 <div class="container">
     <div class="row">
+        <div class="col-xs-8 header">
+            <h2><a href="#/"> PropertyCross</a></h2>
+        </div>
+        <div class="col-xs-4">
+            <a href="#/favorite"> <button id="favorite">
+                <span class="glyphicon glyphicon-star"></span>
+                {{faves}}
+            </button></a>
+
+        </div>
+        <div class="col-xs-12 instruct">
+            Use the form below to search for houses to buy. You can search by place-name, postcode, or click 'My
+            location', to search in tour current location.
+        </div>
+        <div class="col-xs-12">
+            <form class="search">
+                <input type="text"  placeholder="Search..." ng-init="searchReqest" value="{{searchReqest}}">
+            </form>
+        </div>
+        <div class="col-xs-3">
+            <button ><span class="glyphicon glyphicon-globe"></span>
+                Go
+            </button>
+        </div>
+        <div class="col-xs-9">
+            <button>
+                My location
+            </button>
+        </div>
+    </div>
+</div>
+<div>{{searchReqest}}</div>
+<a href="#/">Start</a>
+<a href="#/errorPage">Error</a>
+<div class="container">
+    <div class="row">
         <div class="col-xs-12"></div>
         Recent searches:
         <ul class="ul-staring">
 
-            <li ng-repeat="property in propertyes"><a href="/{{property.lister_url|changeURL}}">
+            <li ng-repeat="property in propertyes"><a href="#/detail?{{property.lister_url}}">
             <span><img ng-src="{{property.thumb_url}}"></span>  <span>{{property.title}}</span>
             </a>
             </li>
