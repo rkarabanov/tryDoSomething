@@ -7,7 +7,7 @@ controllers.controller('PropertySearchCtrl', ['$scope', 'PropertySearchService',
             $scope.propertyes = data.response.listings;
             let inputEl = document.getElementById('input');
             //console.log(inputEl);
-            
+
             // $scope.goSearch = function () {
             //     console.log($scope.searchReqest);
             //     let request = $scope.searchReqest.toUpperCase().split(' ');
@@ -31,45 +31,22 @@ controllers.controller('PropertySearchCtrl', ['$scope', 'PropertySearchService',
             //        
             //     }
             // };
-           
+
         });
     }])
     .controller('PropertyOneCtrl', ['$scope', '$http', '$location', '$routeParams', 'PropertySearchService',
         function ($scope, $http, $location, $routeParams, PropertySearchService) {
-
-            //console.log(data.response.lister_url|changeURL);
-            for (let k in $routeParams) {
-                $scope.propertyId = k;
-                break;
-            }
+            $scope.propertyId=PropertySearchService.getPropertyId();
+            $scope.doFavor = function () {
+                return PropertySearchService.doFavor($scope.propertyId);
+            };
+           
             PropertySearchService.getProperty().success(function (data) {
                 $scope.property = data.response.listings.reduce(function (res, cur) {
                     return strIndexOf(cur.lister_url, $scope.propertyId) ? cur : res;
                 }, null);
-                $scope.doFavor = function () {
-                    let button = document.getElementsByClassName('glyphicon')[0];
-                    if (button.className === "glyphicon glyphicon-star") {
-                        localStorage.removeItem($scope.propertyId);
-                        button.className = "glyphicon glyphicon-star-empty";
-                        console.log("glyphicon-star -> glyphicon-star-empty");
-                    }
-                    else {
-                        button.className = "glyphicon glyphicon-star";
-                        localStorage.setItem($scope.propertyId, $scope.propertyId);
-                        console.log("glyphicon-star <- glyphicon-star-empty");
-                    }
-                };
-                (function () {
-                    let lsLen = localStorage.length;
-                    if (lsLen > 0) {
-                        for (let i = 0; i < lsLen; i++) {
-                            if (strIndexOf(localStorage.key(i), $scope.propertyId)) {
-                                $scope.doFavor();
-                                break;
-                            }
-                        }
-                    }
-                })();
+                PropertySearchService.isFavoriteProperty($scope.propertyId);
+                
 
 
             });
@@ -79,20 +56,8 @@ controllers.controller('PropertySearchCtrl', ['$scope', 'PropertySearchService',
             PropertySearchService.getProperty().success(function (data) {
 
                 $scope.propertyes = data.response.listings;
-                $scope.fPropertyes = [];
-                let lsLen = localStorage.length;
-                if (lsLen > 0) {
-                    //console.log(lsLen+ " "+ $scope.propertyes.length);
-                    for (let i = 0; i < lsLen; i++) {
-                        for (let j = 0; j < $scope.propertyes.length; j++) {
-                            console.log($scope.propertyes[j].lister_url + " " + localStorage.key(i));
-                            if (strIndexOf($scope.propertyes[j].lister_url, localStorage.key(i))) {
-                                $scope.fPropertyes.push($scope.propertyes[j]);
-                            }
-                        }
+                $scope.fPropertyes = PropertySearchService.getFavoritePropertyes($scope.propertyes);
 
-                    }
-                }
             });
         }])
 

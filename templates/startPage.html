@@ -16,7 +16,7 @@
         </div>
         <div class="col-xs-12">
             <form class="search">
-                <input type="text"  placeholder="Search..." ng-init="searchReqest" value="{{searchReqest}}">
+                <input type="text"  placeholder="Search..." ng-init='searchReqest' value="">
             </form>
         </div>
         <div class="col-xs-3">
@@ -31,7 +31,7 @@
         </div>
     </div>
 </div>
-<div>{{searchReqest}}</div>
+<div><span ng-bind="searchReqest"></span></div>
 <a href="#/">Start</a>
 <a href="#/errorPage">Error</a>
 <div class="container">
