@@ -36,10 +36,11 @@ controllers.controller('PropertySearchCtrl', ['$scope', 'PropertySearchService',
     }])
     .controller('PropertyOneCtrl', ['$scope', '$http', '$location', '$routeParams', 'PropertySearchService',
         function ($scope, $http, $location, $routeParams, PropertySearchService) {
+            $scope.isFavorite=true;
             $scope.propertyId=PropertySearchService.getPropertyId();
-            $scope.doFavor = function () {
-                return PropertySearchService.doFavor($scope.propertyId);
-            };
+            // $scope.doFavor = function () {
+            //     return PropertySearchService.doFavor($scope.propertyId);
+            // };
            
             PropertySearchService.getProperty().success(function (data) {
                 $scope.property = data.response.listings.reduce(function (res, cur) {

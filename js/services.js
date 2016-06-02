@@ -9,8 +9,8 @@ propertyApp.service('PropertySearchService', ['$http', '$routeParams', function 
     };
 
     function doFavor(propertyId) {
-        console.log("I'm here");
         let button = document.getElementsByClassName('glyphicon')[0];
+        console.log(button);
         if (button.className === "glyphicon glyphicon-star") {
             localStorage.removeItem(propertyId);
             button.className = "glyphicon glyphicon-star-empty";
