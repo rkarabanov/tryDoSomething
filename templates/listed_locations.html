@@ -1,14 +1,15 @@
-<div  ng-controller="PropertySearchCtrl">
 <div class="container">
     <div class="row">
         <div class="col-xs-8 header">
             <h2><a href="#/"> PropertyCross</a></h2>
         </div>
         <div class="col-xs-4">
-            <a href="#/favorite"> <button id="favorite">
-                <span class="glyphicon glyphicon-star"></span>
-                {{faves}}
-            </button></a>
+            <a href="#/favorite">
+                <button id="favorite">
+                    <span class="glyphicon glyphicon-star"></span>
+                    {{faves}}
+                </button>
+            </a>
 
         </div>
         <div class="col-xs-12 instruct">
@@ -17,11 +18,11 @@
         </div>
         <div class="col-xs-12">
             <form class="search">
-                <input type="text" class="form-control" placeholder="Search..." id="input">
+                <input type="text" class="form-control" placeholder="Search..." ng-model="search">
             </form>
         </div>
         <div class="col-xs-3">
-            <button><a href="#/listedPage"><span class="glyphicon glyphicon-globe"></span>
+            <button><a href="#/listedPage?{{search}}"><span class="glyphicon glyphicon-globe"></span>
                 Go</a>
             </button>
         </div>
@@ -32,16 +33,13 @@
         </div>
     </div>
 </div>
-<a href="#/">Start</a>
-<a href="#/errorPage">Error</a>
-<a href="#/listedPage">listedPage</a>
 <div class="container">
     <div class="row">
         <div class="col-xs-12">
             Please select a location below:
             <ul class="ul-staring">
-                <li ng-repeat="property in propertyes"><a href="/{{property.lister_url|changeURL}}">
-                    <span><img ng-src="{{property.thumb_url}}"></span>  <span>{{property.title}}</span>
+                <li ng-repeat="property in findPropertyes"><a href="#/detail?{{property.lister_url}}">
+                    <span><img ng-src="{{property.thumb_url}}"></span> <span>{{property.title}}</span>
                 </a>
                 </li>
             </ul>

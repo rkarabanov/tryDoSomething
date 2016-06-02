@@ -1,22 +1,26 @@
 'use strict';
-propertyApp.directive('toggle',function () {
+propertyApp.directive('favoriteButton',function () {
 
     return{
-        restrict: 'A',
-        scope: {
-            toggle: "="
-        },
-        link: function($scope, element, attrs) {
-            console.log(element);
-            $scope.$watch("toggle", function(value) {
-                element.toggleClass('glyphicon glyphicon-star-empty', value);
-            });
 
-            element.click(function() {
-                $scope.$apply(function() {
-                   $scope.toggle=!$scope.toggle;
-                })
-            })
+        restrict: 'A',
+        replace: false,
+        scope: true,
+        link: function($scope, element, attrs) {
+           // console.log(element);
+
+
+            $scope.toggleIcon = function() {
+               // console.log(element);
+                $scope.isFavorite=!$scope.isFavorite;
+                
+                if($scope.isFavorite){
+                    $scope.createFavoriteProperty();
+                }
+                    else{
+                    $scope.deleteFavoriteProperty();
+                }
+            }
         }
     }
 });

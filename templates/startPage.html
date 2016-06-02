@@ -16,12 +16,12 @@
         </div>
         <div class="col-xs-12">
             <form class="search">
-                <input type="text"  placeholder="Search..." ng-init='searchReqest' value="">
+                <input type="text"  placeholder="Search..."  ng-model="search">
             </form>
         </div>
         <div class="col-xs-3">
-            <button ><span class="glyphicon glyphicon-globe"></span>
-                Go
+            <button ><a href="#/listedPage?{{search}}"><span class="glyphicon glyphicon-globe"></span>
+                Go</a>
             </button>
         </div>
         <div class="col-xs-9">
@@ -31,22 +31,20 @@
         </div>
     </div>
 </div>
-<div><span ng-bind="searchReqest"></span></div>
-<a href="#/">Start</a>
-<a href="#/errorPage">Error</a>
 <div class="container">
     <div class="row">
-        <div class="col-xs-12"></div>
+        <div class="col-xs-12">
         Recent searches:
         <ul class="ul-staring">
 
-            <li ng-repeat="property in propertyes"><a href="#/detail?{{property.lister_url}}">
-            <span><img ng-src="{{property.thumb_url}}"></span>  <span>{{property.title}}</span>
+            <li ng-repeat="request in searchList"><a href="#/listedPage?{{request.value}}">
+           <span>{{request.key}}</span>
             </a>
             </li>
 
 
         </ul>
+        </div>
         </div>
     </div>
 </div>

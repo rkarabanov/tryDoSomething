@@ -8,11 +8,11 @@ propertyApp
     $routeProvide
         .when('/',{
             templateUrl:'templates/startPage.html',
-            controller:'PropertySearchCtrl'
+            controller:'StartCtrl'
         })
         .when('/errorPage',{
             templateUrl:'templates/error_state.html',
-            controller:'PropertySearchCtrl'
+            controller:'ErrorCtrl'
         })
         .when('/listedPage',{
             templateUrl:'templates/listed_locations.html',

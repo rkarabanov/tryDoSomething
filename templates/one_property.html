@@ -3,5 +3,9 @@
 <div>
     <img ng-src="{{property.img_url}}">
 </div>
-<button toggle="isFavorite"  class="glyphicon glyphicon-star-empty">
+
+<button favorite-button
+        ng-click="toggleIcon()"
+        ng-class="{'glyphicon-star-empty': !isFavorite,'glyphicon-star':isFavorite}"
+        class="glyphicon">
 </button>

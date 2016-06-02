@@ -3,24 +3,61 @@ propertyApp.service('PropertySearchService', ['$http', '$routeParams', function 
     return {
         getProperty: getProperty,
         getPropertyId: getPropertyId,
-        doFavor: doFavor,
         getFavoritePropertyes: getFavoritePropertyes,
-        isFavoriteProperty: isFavoriteProperty
+        getSearchList: getSearchList,
+        isFavoriteProperty: isFavoriteProperty,
+        getRequest: getPropertyId,
+        createFavoriteProperty: createFavoriteProperty,
+        deleteFavoriteProperty: deleteFavoriteProperty,
+        getCountRequest: getCountRequest,
+        getLengthLocalStorage: getLengthLocalStorage,
+        saveRequest: saveRequest,
+        getFindPropertyes: getFindPropertyes
     };
 
-    function doFavor(propertyId) {
-        let button = document.getElementsByClassName('glyphicon')[0];
-        console.log(button);
-        if (button.className === "glyphicon glyphicon-star") {
-            localStorage.removeItem(propertyId);
-            button.className = "glyphicon glyphicon-star-empty";
-            console.log("glyphicon-star -> glyphicon-star-empty");
+    function getFindPropertyes(propertyes, request) {
+        let findPropertyes = [];
+        if(request===undefined){return findPropertyes;}
+        let arr = request.split(' ');
+        let flag = true;
+        for (let i = 0; i < propertyes.length; i++) {
+            flag = true;
+            for (let j of arr) {
+                if (!strIndexOf(propertyes[i].keywords, j)) {
+                    flag = false;
+                }
+            }
+            if (flag) {
+                findPropertyes.push(propertyes[i]);
+            }
         }
-        else {
-            button.className = "glyphicon glyphicon-star";
-            localStorage.setItem(propertyId, propertyId);
-            console.log("glyphicon-star <- glyphicon-star-empty");
+        return findPropertyes;
+    }
+
+    function saveRequest(request ,lenght) {
+        localStorage.setItem("Search #" + (getCountRequest() + 1) + " (" + lenght + ")", request);
+    }
+
+    function getLengthLocalStorage() {
+        return localStorage.length;
+    }
+
+    function getCountRequest() {
+        let count = 0;
+        for (let i in localStorage) {
+            if (strIndexOf(i, "Search")) {
+                count++;
+            }
         }
+        return count;
+    }
+
+    function createFavoriteProperty(propertyId) {
+        localStorage.setItem(propertyId, propertyId);
+    }
+
+    function deleteFavoriteProperty(propertyId) {
+        localStorage.removeItem(propertyId);
     }
 
     function getPropertyId() {
@@ -35,7 +72,7 @@ propertyApp.service('PropertySearchService', ['$http', '$routeParams', function 
 
     function getFavoritePropertyes(propertyes) {
         let fPropertyes = [];
-        let lsLen = localStorage.length;
+        let lsLen = getLengthLocalStorage();
         if (lsLen > 0) {
             //console.log(lsLen+ " "+ propertyes.length);
             for (let i = 0; i < lsLen; i++) {
@@ -50,17 +87,31 @@ propertyApp.service('PropertySearchService', ['$http', '$routeParams', function 
         return fPropertyes;
     }
 
-    function isFavoriteProperty(propertyId) {
+    function getSearchList() {
+        let searchList = [];
+        let lsLen = getLengthLocalStorage();
 
-        let lsLen = localStorage.length;
+        if (lsLen > 0) {
+            for (let i = 0; i < lsLen; i++) {
+                    if (strIndexOf(localStorage.key(i),"Search #")) {
+                        let obj={key:localStorage.key(i),value:localStorage.getItem(localStorage.key(i))};
+                        searchList.push(obj);
+                    }
+            }
+        }
+        return searchList;
+    }
+
+    function isFavoriteProperty(propertyId) {
+        // console.log(localStorage);
+        let lsLen = getLengthLocalStorage();
         if (lsLen > 0) {
             for (let i = 0; i < lsLen; i++) {
                 if (strIndexOf(localStorage.key(i), propertyId)) {
-                    doFavor(propertyId);
-                    break;
+                    return true;
                 }
             }
         }
-
+        return false;
     }
 }]);
