@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 header">
+            <h2><a href="#/"> PropertyCross</a></h2>
+        </div>
+        <div class="col-xs-12">
+        <h3 >{{property.title}}</h3>
+        </div>
+
+        <div class="col-xs-10">{{property.lister_name}}</div>
+        <div class="col-xs-2">
+            <button favorite-button
+                    ng-click="toggleIcon()"
+                    ng-class="{'glyphicon-star-empty': !isFavorite,'glyphicon-star':isFavorite}"
+                    class="glyphicon"
+            >
+            </button>
+        </div>
+        <div class="col-xs-12">
+            <img ng-src="{{property.img_url}}">
+        </div>
+
+        <div class="col-xs-12">
+            Bathroom number : {{property.bathroom_number}}
+        </div>
+        <div class="col-xs-12">
+            Bedroom number : {{property.bedroom_number}}
+        </div>
+        <div class="col-xs-12">
+            Car spaces : {{property.car_spaces}}
+        </div>
+        <div class="col-xs-12">
+           Price : {{property.price_formatted}}
+        </div>
+        <div class="col-xs-12">
+            <a href="{{property.lister_url}}">Go to site...</a>
+
+        </div>
+
+
+    </div>
+
+</div>
