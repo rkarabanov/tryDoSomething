@@ -1,0 +1,31 @@
+#favorite{
+    margin-top: 20px;
+    margin-left: 50px;
+}
+.header{
+    text-align: center;
+}
+.instruct{
+    font-size: 150%;
+}
+.ul-staring{
+    border: 1px solid rgba(23, 0, 11, 1);
+    background: #777777;
+    overflow: auto;
+    list-style: none;
+    padding: 0 0 0 15px;
+    margin: 10px;
+    min-height: 200px;
+    max-height:295px;
+}
+.ul-staring li{
+    padding: 5px 0 5px 15px;
+    margin: 5px 0 5px 15px;
+    background: #dcdcdc;
+    min-width: 100px;
+    max-width: 450px;
+}
+button{
+    margin: 20px 10px 10px 0;
+}
+
