@@ -114,4 +114,7 @@ propertyApp.service('PropertySearchService', ['$http', '$routeParams', function 
         }
         return false;
     }
-}]);
+}])
+
+
+;
