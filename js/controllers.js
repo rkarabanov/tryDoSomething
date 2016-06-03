@@ -1,6 +1,8 @@
 'use strict';
 
-controllers.controller('StartCtrl', ['$scope', 'PropertySearchService',
+controllers
+    
+    .controller('StartCtrl', ['$scope', 'PropertySearchService',
     function ($scope, PropertySearchService) {
         PropertySearchService.getProperty().success(function (data) {
             $scope.faves = "Faves " + (PropertySearchService.getLengthLocalStorage() - PropertySearchService.getCountRequest());
